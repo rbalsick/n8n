@@ -1,1 +1,16 @@
-
+spec:
+  name: n8n
+  databases:
+    - name: default-db
+      engine: PG
+      production: false
+  services:
+    - name: web
+      instance_count: 1
+      git:
+        branch: master
+        repo_clone_url: https://github.com/rbalsick/n8n.git
+      envs:
+        - key: DATABASE_URL
+          value: ${default-db.DATABASE_URL}
+          scope: RUN_TIME
